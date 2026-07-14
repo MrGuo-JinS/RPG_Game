@@ -1,0 +1,29 @@
+{
+  "uuid": "7d2c0ee7-607d-4bbd-baf7-f731304c379d",
+  "type": "weapon",
+  "subtype": "sword",
+  "name": "铁剑",
+  "description": "一把普通的铁剑，适合新手冒险者。",
+  "aliases": ["iron_sword", "铁剑"],
+  
+  "level": 1,
+  "rarity": "common",
+  "value": 100,
+  
+  "stats": {
+    "attack": 10,
+    "durability": 50,
+    "weight": 3.5
+  },
+  
+  "requirements": {
+    "level": 1,
+    "strength": 5,
+    "dexterity": 3
+  },
+  
+  "slots": ["main_hand"],
+  "range": 1,
+  
+  "icon": "assets/weapons/iron_sword.png"
+}

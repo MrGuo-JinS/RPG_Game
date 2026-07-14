@@ -1,0 +1,33 @@
+# 编译产物
+build/
+bin/
+*.exe
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+
+# IDE
+.vscode/
+*.code-workspace
+*.suo
+*.user
+
+# 日志
+logs/
+*.log
+
+# 系统文件
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# 临时文件
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
