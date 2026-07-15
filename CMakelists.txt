@@ -1,55 +1,44 @@
-    cmake_minimum_required(VERSION 3.10)
-    project(RPG_Game)
+cmake_minimum_required(VERSION 3.10)
+project(RPG_Game)
 
-    # C++ 标准
-    set(CMAKE_CXX_STANDARD 17)
-    set(CMAKE_CXX_STANDARD_REQUIRED ON)
-    set(CMAKE_CXX_EXTENSIONS OFF)
+# C++ 标准
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-    # 开启编译警告（方便调试）
-    if(MSVC)
-        add_compile_options(/W4 /WX-)
-    else()
-        add_compile_options(-Wall -Wextra -Wpedantic)
-    endif()
+# 开启编译警告
+if(MSVC)
+    add_compile_options(/W4 /WX-)
+else()
+    add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-    # 设置可执行文件输出目录（可选）
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+# 设置可执行文件输出目录
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-    # ============================================
-    # 头文件目录
-    # ============================================
-    include_directories(
-        include              # 这样 #include "utils/Logger.hpp" 就能找到
-        third_party          # 这样 #include </json.hpp> 就能找到
-    )
+# ============================================
+# 头文件目录
+# ============================================
+include_directories(
+    include
+    third_party
+)
 
-    # ============================================
-    # 源文件列表
-    # ============================================
-    set(SOURCES
-        src/main.cpp
-        src/utils/Logger.cpp
-        src/core/ConfigManager.cpp
-    )
+# ============================================
+# 自动收集所有 .cpp 源文件（递归搜索 src/）
+# ============================================
+file(GLOB_RECURSE SOURCES
+    "src/*.cpp"
+)
 
-    # ============================================
-    # 生成可执行文件
-    # ============================================
-    add_executable(${PROJECT_NAME} ${SOURCES})
+# ============================================
+# 生成可执行文件
+# ============================================
+add_executable(${PROJECT_NAME} ${SOURCES})
 
-    # ============================================
-    # 如果有第三方库需要链接，在这里加
-    # ============================================
-    # target_link_libraries(${PROJECT_NAME} 
-    #     glfw
-    #     opengl32
-    #     ... 
-    # )
-
-    # ============================================
-    # 打印编译信息（方便调试）
-    # ============================================
-    message(STATUS "Project: ${PROJECT_NAME}")
-    message(STATUS "C++ Standard: ${CMAKE_CXX_STANDARD}")
-    message(STATUS "Source files: ${SOURCES}")
+# ============================================
+# 打印编译信息
+# ============================================
+message(STATUS "Project: ${PROJECT_NAME}")
+message(STATUS "C++ Standard: ${CMAKE_CXX_STANDARD}")
+message(STATUS "Source files: ${SOURCES}")
