@@ -1,0 +1,16 @@
+{
+  "uuid": "b3c2da3e-e2b2-4569-8a1a-ed7f80e98a0e",
+  "type": "consumable",
+  "subtype": "antidote",
+  "name": "解毒剂",
+  "description": "可以解除中毒状态的药剂。",
+  "aliases": ["antidote", "解毒剂"],
+  "level": 2,
+  "rarity": "common",
+  "value": 80,
+  "effects": {
+    "cure_poison": true
+  },
+  "stackable": true,
+  "max_stack": 20
+}

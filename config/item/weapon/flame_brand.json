@@ -1,0 +1,23 @@
+{
+  "uuid": "b5dba423-eebb-498c-b430-63be97024c71",
+  "type": "weapon",
+  "subtype": "sword",
+  "name": "火焰剑",
+  "description": "剑身缠绕着永不熄灭的火焰，能灼烧敌人。",
+  "aliases": ["flame_brand", "火焰剑"],
+  "level": 8,
+  "rarity": "rare",
+  "value": 800,
+  "stats": {
+    "attack": 35,
+    "durability": 80,
+    "weight": 4.5
+  },
+  "requirements": {
+    "level": 8,
+    "strength": 14,
+    "dexterity": 8
+  },
+  "slots": ["main_hand"],
+  "range": 1
+}

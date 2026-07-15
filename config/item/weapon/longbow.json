@@ -1,0 +1,23 @@
+{
+  "uuid": "e57f3d83-c1aa-449d-885d-beeb5ff97539",
+  "type": "weapon",
+  "subtype": "bow",
+  "name": "长弓",
+  "description": "射程极远的长弓，需要一定的力量才能拉开。",
+  "aliases": ["longbow", "长弓"],
+  "level": 2,
+  "rarity": "common",
+  "value": 180,
+  "stats": {
+    "attack": 14,
+    "durability": 40,
+    "weight": 2.5
+  },
+  "requirements": {
+    "level": 2,
+    "strength": 6,
+    "dexterity": 8
+  },
+  "slots": ["main_hand"],
+  "range": 5
+}

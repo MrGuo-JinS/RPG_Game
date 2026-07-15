@@ -4,8 +4,40 @@
 #include "item/Armor.hpp"
 #include "item/Consumable.hpp"
 #include <iostream>
-#include <memory>
 #include <windows.h>
+
+void testWeapon(Logger& logger, ConfigManager& config, const std::string& alias) {
+    auto data = config.getByAlias(alias);
+    if (data.has_value()) {
+        Weapon item;
+        item.loadFromJson(data.value());
+        logger.Info("  ✅ " + item.getName() + " (攻击: " + std::to_string(item.getStats().attack) + ")");
+    } else {
+        logger.Warning("  ⚠️ " + alias + " 未找到");
+    }
+}
+
+void testArmor(Logger& logger, ConfigManager& config, const std::string& alias) {
+    auto data = config.getByAlias(alias);
+    if (data.has_value()) {
+        Armor item;
+        item.loadFromJson(data.value());
+        logger.Info("  ✅ " + item.getName() + " (防御: " + std::to_string(item.getStats().defense) + ")");
+    } else {
+        logger.Warning("  ⚠️ " + alias + " 未找到");
+    }
+}
+
+void testConsumable(Logger& logger, ConfigManager& config, const std::string& alias) {
+    auto data = config.getByAlias(alias);
+    if (data.has_value()) {
+        Consumable item;
+        item.loadFromJson(data.value());
+        logger.Info("  ✅ " + item.getName() + " (恢复 HP: " + std::to_string(item.getEffects().healHp) + ", MP: " + std::to_string(item.getEffects().healMp) + ")");
+    } else {
+        logger.Warning("  ⚠️ " + alias + " 未找到");
+    }
+}
 
 int main() {
     SetConsoleOutputCP(CP_UTF8);
@@ -15,57 +47,55 @@ int main() {
     auto& config = ConfigManager::getInstance();
     config.initialize("../config/");
 
-    // 测试：加载铁剑并转为 Weapon 对象
-    auto swordData = config.getByAlias("iron_sword");
-    if (swordData.has_value()) {
-        Weapon sword;
-        sword.loadFromJson(swordData.value());
+    logger.Info("📦 武器列表:");
+    testWeapon(logger, config, "iron_sword");
+    testWeapon(logger, config, "steel_sword");
+    testWeapon(logger, config, "dagger");
+    testWeapon(logger, config, "longbow");
+    testWeapon(logger, config, "flame_brand");
 
-        logger.Info("✅ 武器加载成功！");
-        logger.Info("   名称: " + sword.getName());
-        logger.Info("   类型: " + sword.getTypeName());
-        logger.Info("   攻击: " + std::to_string(sword.getStats().attack));
-        logger.Info("   重量: " + std::to_string(sword.getStats().weight));
-        logger.Info("   要求等级: " + std::to_string(sword.getRequirements().level));
+    logger.Info("");
+
+    logger.Info("🛡️ 防具列表:");
+    testArmor(logger, config, "leather_chest");
+    testArmor(logger, config, "iron_helmet");
+    testArmor(logger, config, "iron_boots");
+
+    logger.Info("");
+
+    logger.Info("🧪 消耗品列表:");
+    testConsumable(logger, config, "health_potion");
+    testConsumable(logger, config, "mana_potion");
+    testConsumable(logger, config, "antidote");
+
+    logger.Info("");
+
+    logger.Info("👹 怪物列表:");
+    auto slime = config.getByAlias("slime");
+    if (slime.has_value()) {
+        std::string name = (*slime)["name"].get<std::string>();
+        int hp = (*slime)["stats"]["hp"].get<int>();
+        logger.Info("  ✅ " + name + " (HP: " + std::to_string(hp) + ")");
     }
 
-    // 测试：加载钢剑
-    auto steelData = config.getByAlias("steel_sword");
-    if (steelData.has_value()) {
-        Weapon steelSword;
-        steelSword.loadFromJson(steelData.value());
-
-        logger.Info("✅ 钢剑加载成功！");
-        logger.Info("   名称: " + steelSword.getName());
-        logger.Info("   攻击: " + std::to_string(steelSword.getStats().attack));
+    auto goblin = config.getByAlias("goblin_warrior");
+    if (goblin.has_value()) {
+        std::string name = (*goblin)["name"].get<std::string>();
+        int hp = (*goblin)["stats"]["hp"].get<int>();
+        logger.Info("  ✅ " + name + " (HP: " + std::to_string(hp) + ")");
     }
 
-    // 测试：加载皮甲
-    auto armorData = config.getByAlias("leather_chest");
-    if (armorData.has_value()) {
-        Armor armor;
-        armor.loadFromJson(armorData.value());
-
-        logger.Info("✅ 皮甲加载成功！");
-        logger.Info("   名称: " + armor.getName());
-        logger.Info("   防御: " + std::to_string(armor.getStats().defense));
+    auto skeleton = config.getByAlias("skeleton");
+    if (skeleton.has_value()) {
+        std::string name = (*skeleton)["name"].get<std::string>();
+        int hp = (*skeleton)["stats"]["hp"].get<int>();
+        logger.Info("  ✅ " + name + " (HP: " + std::to_string(hp) + ")");
     }
 
-    // 测试：加载生命药水
-    auto potionData = config.getByAlias("health_potion");
-    if (potionData.has_value()) {
-        Consumable potion;
-        potion.loadFromJson(potionData.value());
-
-        logger.Info("✅ 生命药水加载成功！");
-        logger.Info("   名称: " + potion.getName());
-        logger.Info("   恢复 HP: " + std::to_string(potion.getEffects().healHp));
-        logger.Info("   可堆叠: " + std::string(potion.isStackable() ? "是" : "否"));
-        logger.Info("   最大堆叠: " + std::to_string(potion.getMaxStack()));
-    }
+    logger.Info("");
 
     logger.Info("📊 总配置文件数: " + std::to_string(config.getFileCount()));
-    logger.Info("测试完成！");
+    logger.Info("✅ 测试完成！");
 
     std::cout << "\n按 Enter 退出...";
     std::cin.get();

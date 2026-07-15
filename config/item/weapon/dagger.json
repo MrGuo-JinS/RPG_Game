@@ -1,0 +1,24 @@
+{
+  "uuid": "6e82c111-edc0-49a1-be61-ee72299fe118",
+  "type": "weapon",
+  "subtype": "dagger",
+  "name": "匕首",
+  "description": "短小精悍的匕首，适合快速攻击。",
+  "aliases": ["dagger", "匕首"],
+  "level": 1,
+  "rarity": "common",
+  "value": 60,
+  "stats": {
+    "attack": 7,
+    "durability": 30,
+    "weight": 1.0,
+    "critRate": 0.15,
+    "critDamage": 1.5
+  },
+  "requirements": {
+    "level": 1,
+    "dexterity": 5
+  },
+  "slots": ["main_hand", "off_hand"],
+  "range": 1
+}

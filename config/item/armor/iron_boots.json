@@ -1,0 +1,21 @@
+{
+  "uuid": "9b37904d-f5fb-4bf8-bd35-e89a89fe8daa",
+  "type": "armor",
+  "subtype": "boots",
+  "name": "铁靴",
+  "description": "沉重的铁靴，保护脚部。",
+  "aliases": ["iron_boots", "铁靴"],
+  "level": 2,
+  "rarity": "common",
+  "value": 100,
+  "stats": {
+    "defense": 3,
+    "durability": 35,
+    "weight": 4.0
+  },
+  "requirements": {
+    "level": 2,
+    "strength": 4
+  },
+  "slots": ["feet"]
+}

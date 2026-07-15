@@ -1,0 +1,21 @@
+{
+  "uuid": "7d4da336-fbbd-4b9e-9590-f9b913e647fa",
+  "type": "armor",
+  "subtype": "helmet",
+  "name": "铁头盔",
+  "description": "坚固的铁制头盔，保护头部。",
+  "aliases": ["iron_helmet", "铁头盔"],
+  "level": 2,
+  "rarity": "common",
+  "value": 120,
+  "stats": {
+    "defense": 4,
+    "durability": 40,
+    "weight": 3.0
+  },
+  "requirements": {
+    "level": 2,
+    "strength": 4
+  },
+  "slots": ["head"]
+}

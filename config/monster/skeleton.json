@@ -1,0 +1,40 @@
+{
+  "uuid": "1a24bc24-dea0-490b-922a-7c1b1ef6e7e1",
+  "type": "monster",
+  "name": "骷髅兵",
+  "description": "从墓地中爬出的不死生物，手持骨刀。",
+  "aliases": ["skeleton", "骷髅兵"],
+  "level": 3,
+  "race": "skeleton",
+  "faction": "hostile",
+  "stats": {
+    "hp": 25,
+    "max_hp": 25,
+    "mp": 0,
+    "max_mp": 0,
+    "attack": 12,
+    "defense": 2,
+    "speed": 3,
+    "exp_reward": 25
+  },
+  "resistances": {
+    "physical": -0.3,
+    "fire": -0.5,
+    "ice": 0.3,
+    "lightning": 0.0,
+    "poison": 0.5,
+    "holy": -0.5,
+    "dark": 0.5
+  },
+  "loot_table": [
+    { "uuid": "6e82c111-edc0-49a1-be61-ee72299fe118", "probability": 0.1, "min_quantity": 1, "max_quantity": 1 }
+  ],
+  "ai": {
+    "behavior": "aggressive",
+    "aggro_range": 4,
+    "attack_range": 1,
+    "flee_threshold": 0.1,
+    "patrol_speed": 2
+  },
+  "skills": ["slash"]
+}

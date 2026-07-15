@@ -1,0 +1,17 @@
+{
+  "uuid": "d4b5bfca-f6b4-40ed-8215-5e08c5bc9725",
+  "type": "consumable",
+  "subtype": "potion",
+  "name": "魔法药水",
+  "description": "闪烁着蓝色光芒的药水，饮用后能恢复 40 点魔法值。",
+  "aliases": ["mana_potion", "蓝药水", "魔法药水"],
+  "level": 2,
+  "rarity": "common",
+  "value": 60,
+  "effects": {
+    "heal_hp": 0,
+    "heal_mp": 40
+  },
+  "stackable": true,
+  "max_stack": 99
+}

@@ -1,0 +1,39 @@
+{
+  "uuid": "538f43f2-5fa3-40ff-bf27-a58a9cadad3d",
+  "type": "monster",
+  "name": "哥布林战士",
+  "description": "绿色皮肤的小个子怪物，手持锈迹斑斑的砍刀。",
+  "aliases": ["goblin_warrior", "哥布林战士"],
+  "level": 2,
+  "race": "goblin",
+  "faction": "hostile",
+  "stats": {
+    "hp": 35,
+    "max_hp": 35,
+    "mp": 0,
+    "max_mp": 0,
+    "attack": 8,
+    "defense": 3,
+    "speed": 3,
+    "exp_reward": 20
+  },
+  "resistances": {
+    "physical": 0.1,
+    "fire": -0.2,
+    "ice": 0.0,
+    "lightning": 0.0,
+    "poison": 0.2
+  },
+  "loot_table": [
+    { "uuid": "7d2c0ee7-607d-4bbd-baf7-f731304c379d", "probability": 0.2, "min_quantity": 1, "max_quantity": 1 },
+    { "uuid": "3b2777d0-b14c-4923-8a15-01a0dc25b39c", "probability": 0.05, "min_quantity": 1, "max_quantity": 1 }
+  ],
+  "ai": {
+    "behavior": "aggressive",
+    "aggro_range": 5,
+    "attack_range": 1,
+    "flee_threshold": 0.15,
+    "patrol_speed": 2
+  },
+  "skills": ["slash", "fear"]
+}
