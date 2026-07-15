@@ -1,0 +1,38 @@
+{
+  "uuid": "877a8de1-98a9-47f2-b781-a6cc4235b8e0",
+  "type": "monster",
+  "name": "史莱姆",
+  "description": "软绵绵的粘液怪，身体呈半透明胶状，经常出现在草原和洞穴中。",
+  "aliases": ["slime", "史莱姆"],
+  "level": 1,
+  "race": "slime",
+  "faction": "neutral",
+  "stats": {
+    "hp": 20,
+    "max_hp": 20,
+    "mp": 0,
+    "max_mp": 0,
+    "attack": 3,
+    "defense": 1,
+    "speed": 2,
+    "exp_reward": 10
+  },
+  "resistances": {
+    "physical": 0.0,
+    "fire": -0.5,
+    "ice": 0.3,
+    "lightning": 0.0,
+    "poison": 0.0
+  },
+  "loot_table": [
+    { "uuid": "3b2777d0-b14c-4923-8a15-01a0dc25b39c", "probability": 0.1, "min_quantity": 1, "max_quantity": 1 }
+  ],
+  "ai": {
+    "behavior": "passive",
+    "aggro_range": 3,
+    "attack_range": 1,
+    "flee_threshold": 0.2,
+    "patrol_speed": 1
+  },
+  "skills": ["tackle"]
+}

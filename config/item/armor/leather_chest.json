@@ -1,0 +1,21 @@
+{
+  "uuid": "bd9d4e08-677c-4deb-a877-5833d45479f8",
+  "type": "armor",
+  "subtype": "chest",
+  "name": "皮甲",
+  "description": "由鞣制皮革制成的轻便护甲，提供基本的防护。",
+  "aliases": ["leather_chest", "皮甲"],
+  "level": 1,
+  "rarity": "common",
+  "value": 80,
+  "stats": {
+    "defense": 5,
+    "durability": 30,
+    "weight": 2.0
+  },
+  "requirements": {
+    "level": 1,
+    "strength": 3
+  },
+  "slots": ["chest"]
+}

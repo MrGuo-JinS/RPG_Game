@@ -1,0 +1,17 @@
+{
+  "uuid": "3b2777d0-b14c-4923-8a15-01a0dc25b39c",
+  "type": "consumable",
+  "subtype": "potion",
+  "name": "生命药水",
+  "description": "闪烁着红色光芒的药水，饮用后能恢复 50 点生命值。",
+  "aliases": ["health_potion", "红药水", "生命药水"],
+  "level": 1,
+  "rarity": "common",
+  "value": 50,
+  "effects": {
+    "heal_hp": 50,
+    "heal_mp": 0
+  },
+  "stackable": true,
+  "max_stack": 99
+}

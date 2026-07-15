@@ -1,0 +1,23 @@
+{
+  "uuid": "f5ebe4ee-8be3-4428-9809-91122a357e55",
+  "type": "weapon",
+  "subtype": "sword",
+  "name": "钢剑",
+  "description": "用精炼钢铁打造的利剑，比铁剑更加锋利耐用。",
+  "aliases": ["steel_sword", "钢剑"],
+  "level": 3,
+  "rarity": "common",
+  "value": 250,
+  "stats": {
+    "attack": 18,
+    "durability": 70,
+    "weight": 4.0
+  },
+  "requirements": {
+    "level": 3,
+    "strength": 8,
+    "dexterity": 4
+  },
+  "slots": ["main_hand"],
+  "range": 1
+}
