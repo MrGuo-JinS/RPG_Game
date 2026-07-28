@@ -1,44 +1,51 @@
-cmake_minimum_required(VERSION 3.10)
-project(RPG_Game)
+cmake_minimum_required(VERSION 3.16)
+project(RPG_Game LANGUAGES C CXX)
 
-# C++ 标准
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# 开启编译警告
-if(MSVC)
-    add_compile_options(/W4 /WX-)
-else()
-    add_compile_options(-Wall -Wextra -Wpedantic)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_BINARY_DIR_BIN "${CMAKE_BINARY_DIR}/bin")
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR_BIN}")
+
+file(GLOB_RECURSE RPG_GAME_SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c"
+)
+
+add_executable(RPG_Game ${RPG_GAME_SOURCES})
+
+target_include_directories(RPG_Game PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/third_party"
+    "${CMAKE_CURRENT_SOURCE_DIR}/third_party/glad/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/third_party/glfw/include"
+)
+
+if(MINGW)
+    target_compile_definitions(RPG_Game PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
 
-# 设置可执行文件输出目录
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(GLFW_LIB_PATH "E:/c++chengxu/Dev-Cpp/MinGW32/lib/libglfw3.a")
 
-# ============================================
-# 头文件目录
-# ============================================
-include_directories(
-    include
-    third_party
+if(NOT EXISTS "${GLFW_LIB_PATH}")
+    set(GLFW_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/third_party/glfw/lib-mingw-w64/libglfw3.a")
+endif()
+
+target_link_libraries(RPG_Game PRIVATE
+    "${GLFW_LIB_PATH}"
+    -Wl,--start-group
+    -lglu32
+    -lopengl32
+    -lgdi32
+    -luser32
+    -lwinmm
+    -Wl,--end-group
+    -static-libgcc
+    -static-libstdc++
 )
 
-# ============================================
-# 自动收集所有 .cpp 源文件（递归搜索 src/）
-# ============================================
-file(GLOB_RECURSE SOURCES
-    "src/*.cpp"
-)
-
-# ============================================
-# 生成可执行文件
-# ============================================
-add_executable(${PROJECT_NAME} ${SOURCES})
-
-# ============================================
-# 打印编译信息
-# ============================================
-message(STATUS "Project: ${PROJECT_NAME}")
-message(STATUS "C++ Standard: ${CMAKE_CXX_STANDARD}")
-message(STATUS "Source files: ${SOURCES}")
+message(STATUS "Built target: RPG_Game")

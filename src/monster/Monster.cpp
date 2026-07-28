@@ -1,8 +1,16 @@
 #include "monster/Monster.hpp"
 #include <stdexcept>
 
+// 静态成员初始化
+std::random_device Monster::m_rd;
+std::mt19937 Monster::m_gen(Monster::m_rd());
+
+// ============================================
+// 公共方法
+// ============================================
+
 void Monster::loadFromJson(const json& data) {
-    // 基础信息
+    // ---- 基础信息 ----
     if (data.contains("uuid") && data["uuid"].is_string()) {
         m_uuid = data["uuid"].get<std::string>();
     }
@@ -32,12 +40,12 @@ void Monster::loadFromJson(const json& data) {
         }
     }
 
-    // 阵营
+    // ---- 阵营 ----
     if (data.contains("faction") && data["faction"].is_string()) {
         m_faction = parseFaction(data["faction"].get<std::string>());
     }
 
-    // 属性
+    // ---- 属性 ----
     if (data.contains("stats") && data["stats"].is_object()) {
         const auto& stats = data["stats"];
         if (stats.contains("hp") && stats["hp"].is_number()) {
@@ -71,7 +79,7 @@ void Monster::loadFromJson(const json& data) {
     // 初始化当前血量
     m_currentHp = m_stats.maxHp;
 
-    // 抗性
+    // ---- 抗性 ----
     if (data.contains("resistances") && data["resistances"].is_object()) {
         const auto& res = data["resistances"];
         if (res.contains("physical") && res["physical"].is_number()) {
@@ -97,7 +105,7 @@ void Monster::loadFromJson(const json& data) {
         }
     }
 
-    // 掉落表
+    // ---- 掉落表 ----
     if (data.contains("loot_table") && data["loot_table"].is_array()) {
         m_lootTable.clear();
         for (const auto& entry : data["loot_table"]) {
@@ -118,7 +126,7 @@ void Monster::loadFromJson(const json& data) {
         }
     }
 
-    // AI
+    // ---- AI ----
     if (data.contains("ai") && data["ai"].is_object()) {
         const auto& ai = data["ai"];
         if (ai.contains("behavior") && ai["behavior"].is_string()) {
@@ -138,7 +146,7 @@ void Monster::loadFromJson(const json& data) {
         }
     }
 
-    // 技能
+    // ---- 技能 ----
     if (data.contains("skills") && data["skills"].is_array()) {
         m_skills.clear();
         for (const auto& skill : data["skills"]) {
@@ -149,19 +157,9 @@ void Monster::loadFromJson(const json& data) {
     }
 }
 
-Faction Monster::parseFaction(const std::string& str) const {
-    if (str == "neutral") return Faction::Neutral;
-    if (str == "hostile") return Faction::Hostile;
-    if (str == "friendly") return Faction::Friendly;
-    return Faction::Neutral;
-}
-
-AIBehavior Monster::parseAIBehavior(const std::string& str) const {
-    if (str == "passive") return AIBehavior::Passive;
-    if (str == "neutral") return AIBehavior::Neutral;
-    if (str == "aggressive") return AIBehavior::Aggressive;
-    return AIBehavior::Passive;
-}
+// ============================================
+// 战斗方法
+// ============================================
 
 void Monster::takeDamage(int damage) {
     if (damage < 0) damage = 0;
@@ -179,4 +177,43 @@ void Monster::heal(int amount) {
 
 void Monster::resetHp() {
     m_currentHp = m_stats.maxHp;
+}
+
+int Monster::calculateDamage(int baseDamage, const std::string& damageType) {
+    // 获取对应抗性
+    float resistance = 0.0f;
+    if (damageType == "physical") resistance = m_resistances.physical;
+    else if (damageType == "fire") resistance = m_resistances.fire;
+    else if (damageType == "ice") resistance = m_resistances.ice;
+    else if (damageType == "lightning") resistance = m_resistances.lightning;
+    else if (damageType == "poison") resistance = m_resistances.poison;
+    else if (damageType == "holy") resistance = m_resistances.holy;
+    else if (damageType == "dark") resistance = m_resistances.dark;
+
+    // 计算实际伤害（抗性为负表示弱点，伤害增加）
+    float multiplier = 1.0f - resistance;
+    int finalDamage = (int)(baseDamage * multiplier);
+
+    // 保底 1 点伤害
+    if (finalDamage < 1) finalDamage = 1;
+
+    return finalDamage;
+}
+
+// ============================================
+// 辅助函数
+// ============================================
+
+Faction Monster::parseFaction(const std::string& str) const {
+    if (str == "neutral") return Faction::Neutral;
+    if (str == "hostile") return Faction::Hostile;
+    if (str == "friendly") return Faction::Friendly;
+    return Faction::Neutral;
+}
+
+AIBehavior Monster::parseAIBehavior(const std::string& str) const {
+    if (str == "passive") return AIBehavior::Passive;
+    if (str == "neutral") return AIBehavior::Neutral;
+    if (str == "aggressive") return AIBehavior::Aggressive;
+    return AIBehavior::Passive;
 }
