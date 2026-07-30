@@ -13,6 +13,5 @@ cmake .. -G "MinGW Makefiles" -DCMAKE_C_COMPILER=D:/MinGW/mingw64/bin/gcc.exe -D
 echo 构建完成，开始编译...
 D:\MinGW\mingw64\bin\mingw32-make.exe
 
-echo 编译完成！
-echo Starting...
+echo 编译完成！开始运行
 .\bin\RPG_Game.exe
