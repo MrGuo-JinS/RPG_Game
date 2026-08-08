@@ -20,41 +20,47 @@ You are a **Signal Runner**, one of the few who can navigate the broken data str
 
 | Feature | Status |
 |---------|--------|
-| Item System (Weapons, Armor, Consumables) | 🚧 In Progress |
-| Player Stats & Progression | 🚧 In Progress |
-| Inventory Management | 📋 Planned |
-| Combat System | 📋 Planned |
-| Quest System | 📋 Planned |
-| Save / Load | 📋 Planned |
-| Config-driven Data (JSON) | ✅ Implemented |
+| Config-driven data (JSON) | ✅ Implemented |
+| Item system (weapons, armor, consumables) | ✅ Implemented |
+| Monster system with stats, resistances, loot, and AI | ✅ Implemented |
+| Config manager with UUID and alias lookup | ✅ Implemented |
+| Player system | 🚧 In Progress |
+| Inventory and equipment systems | 📋 Planned |
+| Combat system | 📋 Planned |
+| Quest system | 📋 Planned |
+| Save / load | 📋 Planned |
 
 ---
 
 ## 🗂️ Project Structure
 ```
-VECTOR/
-├── .vscode/ # VS Code configuration
-├── assets/ # Game assets (textures, sounds, fonts)
-├── build/ # Build output
-│ └── vector.exe
-├── config/ # JSON configuration files
-│ ├── items/ # Item data by category
-│ │ ├── armors/
-│ │ ├── consumables/
-│ │ ├── materials/
-│ │ ├── tools/
-│ │ └── weapons/
-│ └── players/ # Player presets and stats
-├── include/ # Header files (.hpp)
-│ ├── Item.hpp
-│ └── Logger.hpp
-├── src/ # Source files (.cpp)
-│ ├── Logger.cpp
-│ └── main.cpp
-├── third_party/ # External libraries
-│ └── json.hpp # nlohmann/json
-├── README.md
-└── LICENSE
+RPG_Game/
+├── .vscode/              # VS Code configuration
+├── assets/               # Game assets
+├── build/                # Build output directory
+├── build.bat             # Windows build script
+├── config/               # JSON configuration files
+│   ├── item/             # Item definitions
+│   ├── monster/          # Monster definitions
+│   └── player/           # Player-related configs
+├── include/              # Header files
+│   ├── core/             # Core systems
+│   ├── item/             # Item-related headers
+│   ├── monster/          # Monster-related headers
+│   └── utils/            # Utility headers
+├── src/                  # Source files
+│   ├── core/
+│   ├── item/
+│   ├── monster/
+│   └── utils/
+├── third_party/          # Third-party libraries
+│   ├── glad/
+│   ├── glfw/
+│   ├── imgui/
+│   └── json.hpp         # nlohmann/json
+├── CMakeLists.txt
+├── LICENSE
+└── README.md
 ```
 
 
@@ -148,7 +154,12 @@ g++ -std=c++17 -Iinclude src/*.cpp -o build/vector.exe
 
 | Library | Version | License | Purpose |
 |---------|---------|---------|---------|
-| [nlohmann/json](https://github.com/nlohmann/json) | v3.11.2+ | MIT License | JSON parsing for configuration files |
+| [GLFW](https://www.glfw.org/) | 3.3+ | zlib/libpng | Window & Input Management |
+| [GLAD](https://glad.dav1d.de/) | 0.1.36+ | MIT | OpenGL Extension Loader |
+| [Dear ImGui](https://github.com/ocornut/imgui) | v1.90+ | MIT | Graphical User Interface |
+| [nlohmann/json](https://github.com/nlohmann/json) | v3.11.2+ | MIT | JSON Configuration Parsing |
+
+All dependencies are included in the `third_party/` directory with their respective licenses.
 
 ### Build Requirements
 
@@ -165,45 +176,42 @@ All dependencies are header-only. No additional linking required.
 
 ### Phase 1: Foundation
 - [x] Project directory structure
-- [x] Build system setup
-- [x] Logger system
-- [x] JSON config loading
+- [x] CMake-based build setup
+- [x] JSON configuration manager
+- [x] Item and monster data models
 - [x] README & LICENSE
 
 ### Phase 2: Core Systems
-- [x] Item base class
-- [ ] Item categories (weapon / armor / consumable / material / tool)
-- [ ] Item factory & loading from JSON
-- [ ] Player class
-- [ ] Character stats (HP, MP, ATK, DEF, etc.)
+- [x] Config-driven item loading
+- [x] Monster stats, resistances, loot, and AI parsing
+- [ ] Player character system
+- [ ] Inventory and equipment systems
+- [ ] Combat and damage logic
 
 ### Phase 3: Gameplay Mechanics
-- [ ] Inventory system
-- [ ] Equipment system
-- [ ] Combat system
-- [ ] Experience & leveling
-- [ ] Skill system
+- [ ] Main gameplay loop
+- [ ] Quest and progression systems
+- [ ] Save / load support
+- [ ] Skills and abilities
 
 ### Phase 4: World & Content
-- [ ] Map / Tile system
-- [ ] NPC system
+- [ ] Map and scene structure
+- [ ] NPC interactions
 - [ ] Dialogue system
-- [ ] Quest system
-- [ ] Enemy AI
+- [ ] Enemy encounter design
 
 ### Phase 5: User Interface
 - [ ] Main menu
-- [ ] HUD
+- [ ] HUD and status display
 - [ ] Inventory UI
 - [ ] Dialogue UI
 - [ ] Settings menu
 
 ### Phase 6: Polish & Release
-- [ ] Save / Load
-- [ ] Audio
+- [ ] Audio and effects
 - [ ] Balance tuning
 - [ ] Bug fixes
-- [ ] Release
+- [ ] Release preparation
 
 ---
 
